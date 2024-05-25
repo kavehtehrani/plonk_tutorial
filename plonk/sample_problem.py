@@ -2,12 +2,13 @@ from .copy_constraint import find_permutation
 from .constraint import add_mul_constarint, add_add_constarint, add_constant_constraint
 
 
-def gen_witness(x):
-    a = [x, x * x, x * x * x, 1, 1, x * x * x + x]
-    b = [x, x, x, 5, 35, 5]
-    c = [x * x, x * x * x, x + x * x * x, 5, 35, 35]
+def gen_witness(x, y):
+    a = [x * x, -1]
+    b = [y * y, -1]
+    c = [a + b, -1]
+    d = [c - a - b, 0]
 
-    return (a, b, c)
+    return (a, b, c, d)
 
 
 def is_satisfied_witness(a, b, c):
@@ -32,23 +33,13 @@ def gen_constraints():
     # set constraints
     Ql, Qr, Qm, Qo, Qc = add_mul_constarint(Ql, Qr, Qm, Qo, Qc)
     Ql, Qr, Qm, Qo, Qc = add_mul_constarint(Ql, Qr, Qm, Qo, Qc)
+    Ql, Qr, Qm, Qo, Qc = add_mul_constarint(Ql, Qr, Qm, Qo, Qc)
     Ql, Qr, Qm, Qo, Qc = add_add_constarint(Ql, Qr, Qm, Qo, Qc)
-    Ql, Qr, Qm, Qo, Qc = add_constant_constraint(Ql, Qr, Qm, Qo, Qc, 5)
-    Ql, Qr, Qm, Qo, Qc = add_constant_constraint(Ql, Qr, Qm, Qo, Qc, 35)
-    # todo add a constant constraint for 1
-    Ql, Qr, Qm, Qo, Qc = add_add_constarint(Ql, Qr, Qm, Qo, Qc)
+    Ql, Qr, Qm, Qo, Qc = add_constant_constraint(Ql, Qr, Qm, Qo, Qc, 0)
     return (Ql, Qr, Qm, Qo, Qc)
 
 
 def gen_copy_constraints():
-    # copy constraints
-    # a = [x , x*x, x*x*x, 1,  1, x*x*x + x]
-    # b = [x , x, x, 5, 35, 5]
-    # c = [x*x, x*x*x , x + x*x*x ,5, 35, 35]
-    # inputs  = [x , x*x, x*x*x, 1,  1,
-    #           x*x*x + x, x , x, x, 5, 35, 5
-    #           x*x, x*x*x , x + x*x*x ,5, 35, 35]
-
     copy_constraints = [8, 12, 13, 3, 4, 14, 0, 6, 7, 15, 17, 9, 1, 2, 5, 11, 10, 16]
 
     eval_domain = range(0, len(copy_constraints))

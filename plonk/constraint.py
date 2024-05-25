@@ -12,8 +12,8 @@ def is_satisfied(Ql, Qr, Qm, Qo, Qc, a, b, c):
 def add_add_constarint(Ql, Qr, Qm, Qo, Qc):
     Ql.append(1)
     Qr.append(1)
-    Qm.append(0)
-    Qo.append(-1)
+    Qm.append(-1)
+    Qo.append(0)
     Qc.append(0)
     return (Ql, Qr, Qm, Qo, Qc)
 
@@ -22,8 +22,8 @@ def add_mul_constarint(Ql, Qr, Qm, Qo, Qc):
 
     Ql.append(0)
     Qr.append(0)
-    Qm.append(1)
-    Qo.append(-1)
+    Qm.append(-1)
+    Qo.append(1)
     Qc.append(0)
 
     return (Ql, Qr, Qm, Qo, Qc)
